@@ -17,11 +17,11 @@ export class MapContainer extends React.Component {
                 super(props);
 
                 this.state = {
-                        map: undefined,
+                        map: null,
                         location: <Marker position={this.props.location}/>,
                         markers: [],
                         checks: [],
-                        filters: undefined,
+                        filters: null,
                         placesMarkers: []
                 };
 
@@ -142,7 +142,7 @@ export class MapContainer extends React.Component {
          * @param filterId
          */
         fetchPlaces(type, filterId) {
-                if (this.state.map === undefined || !this.props.location)
+                if (this.state.map === null || !this.props.location)
                         return;
 
                 const service = new google.maps.places.PlacesService(this.state.map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
