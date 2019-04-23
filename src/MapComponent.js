@@ -189,7 +189,7 @@ export class MapContainer extends React.Component {
                                         {this.state.location}
                                         {this.state.markers}
                                 </GoogleMap>
-                                <div className="row pt-1">
+                                <div id="filter" className="row pt-1">
                                         {this.state.filters}
                                 </div>
                         </div>
