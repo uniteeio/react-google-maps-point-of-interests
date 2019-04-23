@@ -184,12 +184,12 @@ export class MapContainer extends React.Component {
 
         render() {
                 return (
-                        <div id="test">
+                        <div>
                                 <GoogleMap defaultZoom={14} defaultCenter={this.props.location} ref={this.onMapMounted}>
                                         {this.state.location}
                                         {this.state.markers}
                                 </GoogleMap>
-                                <div id="filter" className="row">
+                                <div className="row pt-1">
                                         {this.state.filters}
                                 </div>
                         </div>
