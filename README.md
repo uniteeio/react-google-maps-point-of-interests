@@ -27,6 +27,8 @@ npm test
 |`loadingElement`               |```<div style={{ height: `100%` }} />```|
 |`containerElement`             |```<div style={{ height: `400px` }} />```|
 |`mapElement`                   |```<div style={{ height: `100%` }} />```|
+|`styleFilter`                   |```{ height: `100%` }```|
+|`styleFilters`                   |```{ height: `100%` }```|
 
 ### Filters
 

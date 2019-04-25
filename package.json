@@ -1,6 +1,6 @@
 {
   "name": "react-google-maps-point-of-interests",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Get the point of interests next to a location and display them on google maps by filtering them.",
   "main": "build/index.js",
   "scripts": {
@@ -13,7 +13,6 @@
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "google-maps-react": "^2.0.2",
     "react-google-maps": "^9.4.5"
   },
   "dependencies": {
