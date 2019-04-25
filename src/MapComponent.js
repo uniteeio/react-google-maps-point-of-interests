@@ -22,8 +22,12 @@ export class MapContainer extends React.Component {
                         markers: [],
                         checks: [],
                         filters: null,
-                        placesMarkers: []
+                        placesMarkers: [],
+                        styleFilter: props.styleFilter,
+                        styleFilters: props.styleFilters
                 };
+
+                console.log(this.state.styleFilter);
 
                 for (var i = 0; i < TYPES.length; i++) {
                         this.state.checks.push(false);
@@ -169,7 +173,7 @@ export class MapContainer extends React.Component {
                 for (var i = 0; i < TYPES.length; i++) {
                         const cp = i;
                         filters.push(
-                                <div key={"filter" + i} className="form-check form-check-inline col">
+                                <div key={"filter" + i} className={"form-check form-check-inline"} style={this.state.styleFilter}>
                                         <input className="form-check-input" type="checkbox" id={TYPES[i].id} value={TYPES[i].id} onChange={ () => {
                                                 this.state.checks[cp] = !this.state.checks[cp];
                                                 (this.state.checks[cp]) ? this.onAddFilter(TYPES[cp]) : this.onRemoveFilter(TYPES[cp].id);
@@ -185,11 +189,11 @@ export class MapContainer extends React.Component {
         render() {
                 return (
                         <div>
-                                <GoogleMap defaultZoom={14} defaultCenter={this.props.location} ref={this.onMapMounted}>
+                                <GoogleMap defaultZoom={15} defaultCenter={this.props.location} ref={this.onMapMounted}>
                                         {this.state.location}
                                         {this.state.markers}
                                 </GoogleMap>
-                                <div id="filter" className="row pt-1">
+                                <div id="filter" className="row pt-1" style={this.state.styleFilters}>
                                         {this.state.filters}
                                 </div>
                         </div>
