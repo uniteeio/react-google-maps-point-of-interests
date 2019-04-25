@@ -27,8 +27,6 @@ export class MapContainer extends React.Component {
                         styleFilters: props.styleFilters
                 };
 
-                console.log(this.state.styleFilter);
-
                 for (var i = 0; i < TYPES.length; i++) {
                         this.state.checks.push(false);
                 }
@@ -41,6 +39,7 @@ export class MapContainer extends React.Component {
                 this.onRemoveFilter = this.onRemoveFilter.bind(this);
                 this.onClickCheck = this.onClickCheck.bind(this);
                 this.buildFilters = this.buildFilters.bind(this);
+                this.onEndGoogleMapsLoading = this.onEndGoogleMapsLoading.bind(this);
         }
 
         componentDidMount() {
@@ -55,8 +54,17 @@ export class MapContainer extends React.Component {
                 const types = filter.values;
 
                 for (var i = 0; i < types.length; i++) {
-                        this.fetchPlaces(types[i], filter.id);
+                        this.fetchPlaces(types[i], filter.id, i < types.length - 1);
                 }
+        }
+
+        onEndGoogleMapsLoading(id) {
+                for (var j = 0; j < this.state.placesMarkers.length; j++) {
+                        if (this.state.placesMarkers[j].name === id) {
+                                this.state.placesMarkers[j].ids = this.createMarkersAndGetItsIds(this.state.placesMarkers[j].places);
+                        }
+                }
+
         }
 
         /**
@@ -78,6 +86,8 @@ export class MapContainer extends React.Component {
                 for (var i = 0; i < this.state.placesMarkers.length; i++) {
                         if (this.state.placesMarkers[i].name !== filter) {
                                 var toKeep = this.state.placesMarkers[i];
+                                if (toKeep.ids === undefined)
+                                        continue;
                                 for (var j = 0; j < toKeep.ids.length; j++) {
                                         for (var k = 0; k < this.state.markers.length; k++) {
                                                 if (toKeep.ids[j] === this.state.markers[k].key) {
@@ -132,11 +142,11 @@ export class MapContainer extends React.Component {
         updatePlaces(places, nameFilter) {
                 for (var i = 0; i < this.state.placesMarkers.length; i++) {
                         if (this.state.placesMarkers[i].name === nameFilter) {
-                                this.state.placesMarkers[i].ids = this.state.placesMarkers[i].ids.concat(this.createMarkersAndGetItsIds(places));
+                                this.state.placesMarkers[i].places = [...this.state.placesMarkers[i].places, ...places];
                                 return;
                         }
                 }
-                const object = {name: nameFilter, ids: this.createMarkersAndGetItsIds(places)};
+                const object = {name: nameFilter, places: places};
                 this.state.placesMarkers.push(object);
         }
 
@@ -145,7 +155,7 @@ export class MapContainer extends React.Component {
          * @param type
          * @param filterId
          */
-        fetchPlaces(type, filterId) {
+        fetchPlaces(type, filterId, isNotEnd) {
                 if (this.state.map === null || !this.props.location)
                         return;
 
@@ -162,6 +172,9 @@ export class MapContainer extends React.Component {
                                 this.updatePlaces(results, filterId);
                                 if (pageToken.hasNextPage) {
                                         pageToken.nextPage();
+                                }
+                                else if (!isNotEnd) {
+                                        this.onEndGoogleMapsLoading(filterId);
                                 }
                         }
                 });
