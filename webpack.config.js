@@ -1,6 +1,7 @@
 var path = require('path');
 
 module.exports = {
+        mode: 'production',
         entry: './src/index.js',
         output: {
                 path: path.resolve(__dirname, 'build'),
@@ -16,6 +17,12 @@ module.exports = {
                                 use: {
                                         loader: 'babel-loader'
                                 }
+                        },
+                        {
+                                test: /\.(png|svg|jpg|gif)$/i,
+                                use: {
+                                        loader: "url-loader",
+                                },
                         }
                 ]
         },

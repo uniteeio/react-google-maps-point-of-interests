@@ -6,7 +6,7 @@ import {
         Marker
 } from "react-google-maps";
 
-import {TYPES} from "./activities";
+import {ICONS, TYPES} from "./activities";
 
 /**
  * Container
@@ -61,7 +61,7 @@ export class MapContainer extends React.Component {
         onEndGoogleMapsLoading(id) {
                 for (var j = 0; j < this.state.placesMarkers.length; j++) {
                         if (this.state.placesMarkers[j].name === id) {
-                                this.state.placesMarkers[j].ids = this.createMarkersAndGetItsIds(this.state.placesMarkers[j].places);
+                                this.state.placesMarkers[j].ids = this.createMarkersAndGetItsIds(this.state.placesMarkers[j].places, id);
                         }
                 }
 
@@ -114,13 +114,13 @@ export class MapContainer extends React.Component {
          * @param places returned by the google api
          * @returns {Array} of the marker keys
          */
-        createMarkersAndGetItsIds(places) {
+        createMarkersAndGetItsIds(places, id) {
                 const ids = [];
 
                 for (var i = 0; i < places.length; i++) {
                         if (!this.existKey(places[i].id)) {
                                 let iconMarker = new window.google.maps.MarkerImage(
-                                        places[i].icon,
+                                        ICONS[id],
                                         null,
                                         null,
                                         null,
