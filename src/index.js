@@ -13,7 +13,9 @@ export default class GoogleMapsPoIComponent extends React.Component {
                         return ('');
                 return (
                         <div>
-                                <MapComponent googleMapURL={GOOGLE_MAPS_MAP.replace("$TO_REPLACE_API_KEY$", this.props.apiKey)} {...this.props}/>
+                                <MapComponent
+                                    googleMapURL={GOOGLE_MAPS_MAP.replace("$TO_REPLACE_API_KEY$", this.props.apiKey)}
+                                    {...this.props}/>
                         </div>
                         )
         }

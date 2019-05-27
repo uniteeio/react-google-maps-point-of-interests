@@ -24,7 +24,8 @@ export class MapContainer extends React.Component {
                         filters: null,
                         placesMarkers: [],
                         styleFilter: props.styleFilter,
-                        styleFilters: props.styleFilters
+                        styleFilters: props.styleFilters,
+                        loading: false
                 };
 
                 for (var i = 0; i < TYPES.length; i++) {
@@ -53,6 +54,8 @@ export class MapContainer extends React.Component {
         onAddFilter(filter) {
                 const types = filter.values;
 
+                this.setState({loading: true});
+
                 for (var i = 0; i < types.length; i++) {
                         this.fetchPlaces(types[i], filter.id, i < types.length - 1);
                 }
@@ -64,7 +67,7 @@ export class MapContainer extends React.Component {
                                 this.state.placesMarkers[j].ids = this.createMarkersAndGetItsIds(this.state.placesMarkers[j].places, id);
                         }
                 }
-
+                this.setState({loading: false});
         }
 
         /**
@@ -168,6 +171,9 @@ export class MapContainer extends React.Component {
                         request.type = type;
                 }
                 service.nearbySearch(request, (results, status, pageToken) => {
+                        if (!isNotEnd && status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+                                this.setState({loading: false});
+                        }
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                                 this.updatePlaces(results, filterId);
                                 if (pageToken.hasNextPage) {
@@ -208,6 +214,9 @@ export class MapContainer extends React.Component {
                                 </GoogleMap>
                                 <div id="filter" className="row pt-1" style={this.state.styleFilters}>
                                         {this.state.filters}
+                                </div>
+                                <div className={"text-center"}>
+                                        {this.state.loading && this.props.loading}
                                 </div>
                         </div>
                 )
