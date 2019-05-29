@@ -186,16 +186,19 @@ export class MapContainer extends React.Component {
                 });
         }
 
-        buildFilters() {
+        buildFilters(prevChecks = this.state.checks) {
                 const filters = [];
 
                 for (var i = 0; i < TYPES.length; i++) {
                         const cp = i;
                         filters.push(
                                 <div key={"filter" + i} className={"form-check form-check-inline"} style={this.state.styleFilter}>
-                                        <input className="form-check-input" type="checkbox" id={TYPES[i].id} value={TYPES[i].id} onChange={ () => {
-                                                this.state.checks[cp] = !this.state.checks[cp];
-                                                (this.state.checks[cp]) ? this.onAddFilter(TYPES[cp]) : this.onRemoveFilter(TYPES[cp].id);
+                                        <input className="form-check-input" type="checkbox" id={TYPES[i].id} value={TYPES[i].id} checked={prevChecks[cp]} onChange={ () => {
+                                                var checks = this.state.checks;
+                                                checks[cp] = !checks[cp];
+                                                this.setState({checks: checks});
+                                                (checks[cp]) ? this.onAddFilter(TYPES[cp]) : this.onRemoveFilter(TYPES[cp].id);
+                                                this.setState({filters: this.buildFilters(checks)});
                                         } }/>
                                         <label className="form-check-label" htmlFor={TYPES[i].id}>{TYPES[i].name}</label>
                                 </div>
@@ -213,9 +216,7 @@ export class MapContainer extends React.Component {
                                         {this.state.markers}
                                 </GoogleMap>
                                 <div id="filter" className="row pt-1" style={this.state.styleFilters}>
-                                        {this.state.filters}
-                                </div>
-                                <div className={"text-center"}>
+                                        {!this.state.loading && this.state.filters}
                                         {this.state.loading && this.props.loading}
                                 </div>
                         </div>
