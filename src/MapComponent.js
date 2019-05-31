@@ -215,10 +215,12 @@ export class MapContainer extends React.Component {
                                         {this.state.location}
                                         {this.state.markers}
                                 </GoogleMap>
+                                {!this.state.loading &&
                                 <div id="filter" className="row pt-1" style={this.state.styleFilters}>
-                                        {!this.state.loading && this.state.filters}
-                                        {this.state.loading && this.props.loading}
-                                </div>
+                                        {this.state.filters}
+                                </div>}
+                                {this.state.loading &&
+                                        <div id="loading" className={"text-center"}>{this.props.loading}</div>}
                         </div>
                 )
         }
