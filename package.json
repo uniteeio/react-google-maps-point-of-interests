@@ -10,16 +10,11 @@
   },
   "author": "unitee claire chong",
   "license": "MIT",
-  "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-google-maps": "^9.4.5"
-  },
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-google-maps": "^9.4.5",
-    "webpack": "^4.29.6"
+    "webpack": "^4.28.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
