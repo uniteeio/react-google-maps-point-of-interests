@@ -13,25 +13,21 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-google-maps": "^9.4.5",
-    "webpack": "^4.28.3"
+    "react-google-maps": "^9.4.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "file-loader": "^3.0.1",
-    "html-loader": "^0.5.5",
-    "jest": "^24.7.1",
-    "jsdom": "^14.0.0",
-    "sinon": "^7.3.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jsdom": "^15.1.1",
     "url-loader": "^1.1.2",
-    "webpack-cli": "^3.3.0"
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
   }
 }
