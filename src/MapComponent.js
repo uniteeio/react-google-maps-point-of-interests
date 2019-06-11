@@ -200,7 +200,7 @@ export class MapContainer extends React.Component {
                                                 (checks[cp]) ? this.onAddFilter(TYPES[cp]) : this.onRemoveFilter(TYPES[cp].id);
                                                 this.setState({filters: this.buildFilters(checks)});
                                         } }/>
-                                        <label className="form-check-label" htmlFor={TYPES[i].id}>{TYPES[i].name}</label>
+                                        <label htmlFor={TYPES[i].id}>{TYPES[i].name}</label>
                                 </div>
                         )
                 }
