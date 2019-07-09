@@ -7,8 +7,7 @@ import {
 } from "react-google-maps";
 
 import {ICONS, TYPES} from "./activities";
-
-
+import InfoMarker from "./InfoMarker";
 
 /**
  * Container
@@ -124,20 +123,9 @@ export class MapContainer extends React.Component {
 
     for (var i = 0; i < places.length; i++) {
       if (!this.existKey(places[i].id)) {
-        let iconMarker = new window.google.maps.MarkerImage(
-          ICONS[id],
-          null,
-          null,
-          null,
-          new window.google.maps.Size(40, 40)
-        );
 
         ids.push(places[i].id);
-        this.setState({markers: this.state.markers.concat([<Marker
-            icon={iconMarker}
-            key={places[i].id}
-            position={{lat: places[i].geometry.location.lat(), lng: places[i].geometry.location.lng()}}
-          />])});
+        this.setState({markers: this.state.markers.concat([<InfoMarker id={id} poi={places[i]} key={places[i].id}/>])});
       }
 
     }
@@ -173,7 +161,7 @@ export class MapContainer extends React.Component {
       request.type = type;
     }
     service.nearbySearch(request, (results, status, pageToken) => {
-      if (!isNotEnd && status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+      if (!isNotEnd && (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS || (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT))) {
         this.setState({loading: false});
       }
       if (status === google.maps.places.PlacesServiceStatus.OK) {
