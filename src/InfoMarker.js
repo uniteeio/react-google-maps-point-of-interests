@@ -6,14 +6,10 @@ export default class InfoMarker extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {open: false, poi: props.poi, id: props.id};
+    this.state = {poi: props.poi, id: props.id, open: false, urlImg: undefined};
 
-    this.onClick = this.onClick.bind(this);
     this.buildIconMarker = this.buildIconMarker.bind(this);
-  }
-
-  onClick() {
-    this.setState({open: !this.state.open});
+    this.onClick = this.onClick.bind(this);
   }
 
   buildIconMarker() {
@@ -25,6 +21,13 @@ export default class InfoMarker extends React.Component {
       new window.google.maps.Size(40, 40)
     );
 
+  }
+
+  onClick() {
+    if (!this.state.open && this.props.poi.photos && this.props.poi.photos.length && !this.state.urlImg) {
+      this.setState({urlImg: this.props.poi.photos[0].getUrl()});
+    }
+    this.setState({open: !this.state.open});
   }
 
   render() {
@@ -39,7 +42,14 @@ export default class InfoMarker extends React.Component {
         {
           this.state.open &&
           <InfoWindow onCloseClick={this.onClick}>
-            <span>{this.state.poi.name}</span>
+            <div className={"row text-center"} style={{maxWidth: '200px'}}>
+              { this.state.urlImg &&
+               <div className={"text-center col m-0 p-0"}>
+                <img src={this.state.urlImg} className={"img-fluid"} style={{width: '180px'}}/>
+               </div>
+              }
+              <span className={"col"}>{this.state.poi.name}</span>
+            </div>
           </InfoWindow>
         }
       </Marker>

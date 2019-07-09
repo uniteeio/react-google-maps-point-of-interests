@@ -6,7 +6,7 @@ import {
   Marker
 } from "react-google-maps";
 
-import {ICONS, TYPES} from "./activities";
+import {TYPES} from "./activities";
 import InfoMarker from "./InfoMarker";
 
 /**
