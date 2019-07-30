@@ -10,10 +10,6 @@ It uses react-google-maps to display the map.
 
 npm install react-google-maps-point-of-interests
 
-# Launch tests
-
-npm test
-
 # Components
 
 ## GoogleMapsPoIComponent
@@ -27,8 +23,9 @@ npm test
 |`loadingElement`               |```<div style={{ height: `100%` }} />```|
 |`containerElement`             |```<div style={{ height: `400px` }} />```|
 |`mapElement`                   |```<div style={{ height: `100%` }} />```|
-|`styleFilter`                   |```{ height: `100%` }```|
-|`styleFilters`                   |```{ height: `100%` }```|
+|`filtersOptins`                |```{className: "row p-2", containerClassName: "form-check col", inputClassName: "form-check-input", labelClassName: "form-check-label"}```|
+|`loadingOptions`                   |```{className: "w-100 text-center mt-3"}```|
+|`loading`                      | ```the loading component```
 
 ### Filters
 
